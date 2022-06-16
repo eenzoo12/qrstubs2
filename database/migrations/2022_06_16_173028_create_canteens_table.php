@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEmailCanteenTable extends Migration
+class CreateCanteensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddEmailCanteenTable extends Migration
      */
     public function up()
     {
-        Schema::table('canteens', function (Blueprint $table) {
-            $table->string('email')->nullable()->after('name');
+        Schema::create('canteen_tbl', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddEmailCanteenTable extends Migration
      */
     public function down()
     {
-        Schema::table('canteens', function (Blueprint $table) {
-            $table->dropColumn('email');
-        });
+        Schema::dropIfExists('canteen_tbl');
     }
 }
